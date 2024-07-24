@@ -158,8 +158,12 @@ function createRandomOrderTicket() {
     let imageElement = document.createElement('img');
     imageElement.src = ingredientImage.image2;
     imageElement.alt = ingredientImage.name;
-    imageElement.style.width = '20px'; // Set image width to 20px
-    imageElement.style.height = '20px'; // Set image height to 20px
+    imageElement.style.width = '220px'; // Set image width to 20px
+    imageElement.style.height = '220px'; // Set image height to 20px
+    imageElement.style.zIndex = randomTicket.ingredients.length + i; // Set z-index based on ingredient order
+
+    imageElement.style.marginTop = (randomTicket.ingredients.length - i) * 20 + 'px'; // Set margin top based on ingredient order
+
     ingredientLI.appendChild(imageElement);
 
     ingredientsUL.appendChild(ingredientLI);
@@ -178,8 +182,18 @@ function crossOffItem(event) {
   if (orderIngredientsList[lastIndex - currentIngredientIndex].textContent === clickedIngredient.name) {
     let ingredientImage = ingredients.find(ingredient => ingredient.name === clickedIngredient.name);
     orderIngredientsList[lastIndex - currentIngredientIndex].style.backgroundImage = `url(${ingredientImage.image2})`;
-    orderIngredientsList[lastIndex - currentIngredientIndex].style.backgroundSize = 'contain';
+    // orderIngredientsList[lastIndex - currentIngredientIndex].style.backgroundSize = 'contain';
+    orderIngredientsList[lastIndex - currentIngredientIndex].style.width = '450px';
+    orderIngredientsList[lastIndex - currentIngredientIndex].style.height = '450px';
     orderIngredientsList[lastIndex - currentIngredientIndex].style.backgroundRepeat = 'no-repeat';
+    orderIngredientsList[lastIndex - currentIngredientIndex].style.zIndex = currentIngredientIndex;
+    orderIngredientsList[lastIndex - currentIngredientIndex].style.marginTop = (lastIndex - currentIngredientIndex) * 20 + 'px'; // Set margin top based on ingredient order
+    orderIngredientsList[lastIndex - currentIngredientIndex].style.position = 'absolute'; // Add this line
+    // orderIngredientsList[lastIndex - currentIngredientIndex].style.top = '1000px'; 
+    // orderIngredientsList[lastIndex - currentIngredientIndex].style.left = '0px';
+    // orderIngredientsList[lastIndex - currentIngredientIndex].style.backgroundPosition = `${100}% ${y}%`;
+    // orderIngredientsList[lastIndex - currentIngredientIndex].style.backgroundPosition = '-200px 50px';
+    orderIngredientsList[lastIndex - currentIngredientIndex].style.overflow = 'visible';
     currentIngredientIndex++;
   }
 }
