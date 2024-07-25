@@ -22,29 +22,33 @@ body {
   height: 100%;
   overflow: auto;
   background-color: rgb(0,0,0);
-  background-color: rgba(0,0,0,0.6);
+  background-color: rgba(0,0,0,0.3);
   text-align: center;
 }
 
 .modal-content {
   position: flex;
-  background: #eff4ff;
+  background: rgba(0, 0, 0, 0.7);
   margin: auto;
   width: 50%;
   height: 50%;
   position: relative;
   font-size: calc(70px + (80 - 70) * ((100vw - 360px) / (1028 - 360)));
-  color: black;
+  color: yellow;
+  text-shadow: orange 0px 0px 10px;
+  line-height: 200px;
+  border-radius: 100px;
 }
 
 .close {
-  color: #aaa;
+  color: #fff;
   float: right;
+  text-shadow: orange 0px 0px 10px;
 }
 
 .close:hover,
 .close:focus {
-  color: black;
+  color: #ffff5d;
   text-decoration: none;
   cursor: pointer;
 }
@@ -57,7 +61,7 @@ body {
   background-position: center; */
   margin: auto;
   padding-top: 15%;
-  font-size: 80px;
+  font-size: 80px;  color: #fff;
   font-weight: bold;
 }
 
@@ -85,11 +89,15 @@ body {
  
 #clock  {
   position: absolute;
-  font-size: 90px;
-  top: 586px;
+  font-size: 80px;
+  top: 588px;
   right: 140px ;
   text-align: center;
   color: #ffff5d;
+  letter-spacing: 5px;
+  font: monospace;
+  text-shadow: orange 0px 0px 10px;
+  
   /* align-items: center;
   justify-content: center;
  
@@ -103,10 +111,11 @@ body {
 #score {
   position: absolute;
   font-size: 80px;
-  top: 59px;
+  top: 65px;
   right: 820px ;
   text-align: right;
   color: #fff;
+  text-shadow: #fff 0px 0px 1px;
   /* display: flex;
   align-items: center;
   justify-content: center;
@@ -127,7 +136,7 @@ body {
   position: absolute;
   height: 40%;
   width: 1920px;
-  top: 290px;
+  top: 280px;
   right: -1000px;
   justify-content: end;
   overflow: visible;
@@ -175,10 +184,12 @@ body {
   position: absolute;
   /* border: 4px solid black;
   border-radius: 5px; */
-  height: 98%;
-  width: 200px;
+  /* height: 98%; */
+  height: 2000px;
+  width: 2000px;
   margin: 0.5%;
-  filter: opacity(30%);
+  /* filter: opacity(30%); */
+  filter: opacity(0%);
   transition: left .1s;
   top: 0px;
   overflow: visible;
@@ -226,6 +237,8 @@ body {
   /* top: 200px; */
   width: 1920px;
   overflow: visible;
+  height: 2000px;
+  width: 2000px;
 }
 
 #bottom {
@@ -238,7 +251,7 @@ body {
   padding: 0px;
   margin: 0px;
   top: 180px;
-  left: 600px;
+  left: 597px;
 }
 
 .row {
@@ -269,4 +282,46 @@ body {
  height: 20px;
  margin: 0;
  padding: 0;
+}
+.crossOffItem {
+  position: absolute;
+  transform: translate(-20px, 50px); /* adjust these values to move it down and left */
+}
+ 
+.ingredient {
+  transition: background-color 0.2s ease-in-out;
+  /* border-radius: 50px; */
+
+}
+
+/* .ingredient.clicked {
+  background-color: #ccc;
+} */
+
+.ingredient.clicked.animate {
+  animation: pulse 0.5s ease-in-out;
+  animation-fill-mode: forwards;
+}
+
+@keyframes pulse {
+  30% {
+    transform: scale(1);
+  }
+  45%{
+    filter: brightness(3);
+    /* background-color: cyan; */
+    background: url(../backbtn.png) no-repeat;
+background-size: contain; /* 또는 cover */
+  }
+  50% {
+    transform: scale(1.05);
+
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+.ingredient:hover {
+  transform: scale(1.05);
+  filter: brightness(1.25);
 }

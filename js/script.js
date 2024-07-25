@@ -110,11 +110,39 @@ function hideStartPopup() {
   startPopup.style.display = 'none';
 }
 
-function shuffle(array) {
+// function shuffle(array) {
 
+//   let currentIndex = array.length;
+//   let temporaryValue, randomIndex;
+
+//   while (0 != currentIndex) {
+//     randomIndex = Math.floor(Math.random() * currentIndex);
+//     currentIndex -= 1;
+//     temporaryValue = array[currentIndex];
+//     array[currentIndex] = array[randomIndex];
+//     array[randomIndex] = temporaryValue;
+//   }
+//   return array;
+// }
+
+// function randomlyPlaceIngredientImages() {
+//   for (i = 0; i < ingredientImageDivs.length; i++) {
+//     let imageDiv = document.createElement('div');
+//     imageDiv.name = ingredients[i].name;
+//     imageDiv.style.backgroundImage = 'url(' + ingredients[i].imageColor + ')';
+//     imageDiv.className = 'ingredient';
+//     ingredientImageDivs[i].appendChild(imageDiv);
+//     ingredientImageDivs[i].addEventListener('click', crossOffItem);
+//     ingredientImageDivs[i].addEventListener('click', switchOrderTicket);
+//   }
+// }
+function shuffle(array) {
+  // This function will mutate the original array and should
+  // accept a slice or copy of the original array instead.
   let currentIndex = array.length;
   let temporaryValue, randomIndex;
 
+  // Iterate backwards through array, randomizing the indexes of all items
   while (0 != currentIndex) {
     randomIndex = Math.floor(Math.random() * currentIndex);
     currentIndex -= 1;
@@ -126,16 +154,20 @@ function shuffle(array) {
 }
 
 function randomlyPlaceIngredientImages() {
+  // Slice the array to prevent mutation of the original
+  let shuffledIngredients = shuffle(ingredients.slice());
+
   for (i = 0; i < ingredientImageDivs.length; i++) {
     let imageDiv = document.createElement('div');
-    imageDiv.name = ingredients[i].name;
-    imageDiv.style.backgroundImage = 'url(' + ingredients[i].imageColor + ')';
+    imageDiv.name = shuffledIngredients[i].name;
+    imageDiv.style.backgroundImage = 'url(' + shuffledIngredients[i].imageColor + ')';
     imageDiv.className = 'ingredient';
     ingredientImageDivs[i].appendChild(imageDiv);
     ingredientImageDivs[i].addEventListener('click', crossOffItem);
     ingredientImageDivs[i].addEventListener('click', switchOrderTicket);
   }
 }
+
 function createRandomOrderTicket() {
   let shuffledOrderTickets = shuffle(orderTicketData.slice());
   let randomTicket = shuffledOrderTickets.pop();
@@ -176,6 +208,7 @@ function crossOffItem(event) {
   let clickedIngredient = event.target;
   let activeOrderTicket = document.getElementById('active-ticket');
   let orderIngredientsList = activeOrderTicket.children[0].children;
+  
 
   // Update the currentIngredientIndex to start from the bottom
   let lastIndex = orderIngredientsList.length - 1;
@@ -183,18 +216,31 @@ function crossOffItem(event) {
     let ingredientImage = ingredients.find(ingredient => ingredient.name === clickedIngredient.name);
     orderIngredientsList[lastIndex - currentIngredientIndex].style.backgroundImage = `url(${ingredientImage.image2})`;
     // orderIngredientsList[lastIndex - currentIngredientIndex].style.backgroundSize = 'contain';
-    orderIngredientsList[lastIndex - currentIngredientIndex].style.width = '450px';
-    orderIngredientsList[lastIndex - currentIngredientIndex].style.height = '450px';
+    orderIngredientsList[lastIndex - currentIngredientIndex].style.width = '4500px';
+    orderIngredientsList[lastIndex - currentIngredientIndex].style.height = '4500px';
     orderIngredientsList[lastIndex - currentIngredientIndex].style.backgroundRepeat = 'no-repeat';
     orderIngredientsList[lastIndex - currentIngredientIndex].style.zIndex = currentIngredientIndex;
     orderIngredientsList[lastIndex - currentIngredientIndex].style.marginTop = (lastIndex - currentIngredientIndex) * 20 + 'px'; // Set margin top based on ingredient order
     orderIngredientsList[lastIndex - currentIngredientIndex].style.position = 'absolute'; // Add this line
-    // orderIngredientsList[lastIndex - currentIngredientIndex].style.top = '1000px'; 
-    // orderIngredientsList[lastIndex - currentIngredientIndex].style.left = '0px';
+    orderIngredientsList[lastIndex - currentIngredientIndex].style.top = '580px'; 
+    orderIngredientsList[lastIndex - currentIngredientIndex].style.left = '-665px';
     // orderIngredientsList[lastIndex - currentIngredientIndex].style.backgroundPosition = `${100}% ${y}%`;
     // orderIngredientsList[lastIndex - currentIngredientIndex].style.backgroundPosition = '-200px 50px';
     orderIngredientsList[lastIndex - currentIngredientIndex].style.overflow = 'visible';
+
+  // Add the clicked class to the button
+  event.target.classList.add('clicked');
+
+  // Add the animate class to the button, and then remove it after 0.5 seconds
+
+
     currentIngredientIndex++;
+  event.target.classList.add('animate');
+  setTimeout(() => {
+    event.target.classList.remove('animate');
+  }, 500);
+  
+
   }
 }
 
