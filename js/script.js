@@ -230,7 +230,8 @@ function crossOffItem(event) {
 
   // Add the clicked class to the button
   event.target.classList.add('clicked');
-
+  const audio = new Audio('./click.ogg'); // replace with your own sound file
+  audio.play();
   // Add the animate class to the button, and then remove it after 0.5 seconds
 
 
@@ -255,6 +256,8 @@ function isListComplete() {
 
   if (activeListItems.every(isItemCrossedOut)) {
     console.log('List is complete!');
+    const audio = new Audio('./completed.ogg'); // replace with your own sound file
+    audio.play();
     return true;
   }
   console.log('List is not complete yet...');
@@ -355,7 +358,9 @@ function startGame() {
 
   runClock(60*100);
   randomlyPlaceIngredientImages();
-
+// Play a sound effect when the game starts
+const audio = new Audio('./start.ogg'); // replace with your own sound file
+audio.play();
   // Make three new order tickets
   createRandomOrderTicket();
   createRandomOrderTicket();
