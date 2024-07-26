@@ -305,6 +305,8 @@ function runClock(duration) {
       clearTimeout(timerId);
       tallyScore();
       showStartPopup();
+      const gameOverAudio = new Audio('./gameover.ogg'); // replace with your own sound file
+      gameOverAudio.play();
       for (let i = 0; i < ingredientImageDivs.length; i++) {
         ingredientImageDivs[i].removeEventListener('click', crossOffItem);
         ingredientImageDivs[i].removeEventListener('click', switchOrderTicket);
