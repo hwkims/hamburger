@@ -193,7 +193,7 @@ function createRandomOrderTicket() {
     imageElement.style.width = '220px'; // Set image width to 20px
     imageElement.style.height = '220px'; // Set image height to 20px
     imageElement.style.zIndex = randomTicket.ingredients.length + i; // Set z-index based on ingredient order
-
+    imageElement.style.position = 'absolute'; // Set position to absolute
     imageElement.style.marginTop = (randomTicket.ingredients.length - i) * 20 + 'px'; // Set margin top based on ingredient order
 
     ingredientLI.appendChild(imageElement);
@@ -339,6 +339,13 @@ function resetGame() {
     for (i = ingredientDivs.length -1 ; i >= 0; i--) {
       ingredientDivs[i].remove();
     }
+  }
+  // Reset currentIngredientIndex
+  currentIngredientIndex = 0;
+  // Remove event listeners from ingredientImageDivs
+  for (let i = 0; i < ingredientImageDivs.length; i++) {
+    ingredientImageDivs[i].removeEventListener('click', crossOffItem);
+    ingredientImageDivs[i].removeEventListener('click', switchOrderTicket);
   }
 
   // Remove score from start popup modal
